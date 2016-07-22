@@ -10,6 +10,7 @@ import model.Game;
 public class Test {
 	public static void main(String[] args){
 		//TODO
-		new Game(800,800);
+		Game g = new Game(800,800);
+		g.play(60000);
 	}
 }
