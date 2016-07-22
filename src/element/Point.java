@@ -1,5 +1,14 @@
 package element;
 
-public class Point implements Touch{
+/**
+ * 
+ * @author p1ma
+ *
+ */
+public class Point extends Touch{
 
+	public Point(int x, int y)
+	{
+		super(x,y);
+	}
 }
