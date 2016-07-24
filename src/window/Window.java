@@ -64,6 +64,8 @@ public class Window extends JPanel{
 		this.toTouch.clean(g); // remove old Touch element
 		this.toTouch.draw(g); // draw the new one
 	}
+	
+	
 
 	public void play(int limitX, int limitY, int duration){
 		while(begin <= start + duration){
@@ -71,8 +73,8 @@ public class Window extends JPanel{
 			//if Touch object is not touched no need to re-draw it, wait duration
 			if(!touched){
 				if(this.begin >= this.end){
-					xPop = random.nextInt(limitX) + 1;
-					yPop = random.nextInt(limitY) + 1;
+					touched = false;
+					generate(limitX, limitY);
 					this.toTouch.set(xPop, yPop);
 					System.out.println("POP = " + "( " + xPop + ", " + yPop + " )");
 					this.end = System.currentTimeMillis() + Game.timeSpawn;
@@ -80,9 +82,9 @@ public class Window extends JPanel{
 				}
 			}//Touch object touched
 			else{
+				this.begin = System.currentTimeMillis();
 				touched = false;
-				xPop = random.nextInt(limitX) + 1;
-				yPop = random.nextInt(limitY) + 1;
+				generate(limitX, limitY);
 				this.toTouch.set(xPop, yPop);
 				System.out.println("POP = " + "( " + xPop + ", " + yPop + " )");
 				this.end = System.currentTimeMillis() + Game.timeSpawn;
@@ -98,5 +100,10 @@ public class Window extends JPanel{
 	
 	public void isTouched(){
 		touched = true;
+	}
+	
+	public void generate(int limitX, int limitY){
+		xPop = random.nextInt(limitX - this.toTouch.width) + 1;
+		yPop = random.nextInt(limitY - this.toTouch.width) + 1;
 	}
 }
