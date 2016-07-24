@@ -27,7 +27,6 @@ public class Window extends JPanel{
 	public Window(Color background){
 		super();
 		this.setBackground(background);
-		this.toTouch = null;
 		random = new Random();
 		begin = System.currentTimeMillis();
 		end = System.currentTimeMillis() + Game.timeSpawn;
@@ -36,15 +35,18 @@ public class Window extends JPanel{
 		
 		xPop = 1;
 		yPop = 1;
+		
+		this.toTouch = new Point(xPop, yPop);
+		repaint();
 	}
 	
 	public void drawPoint(Graphics g, int x, int y){
 		if(toTouch == null){
 			this.toTouch = new Point(x,y);
 			g.setColor(toTouch.getColor());
-			g.fillRect(x, y, Touch.width, Touch.width);
+			g.fillRect(x, y, Touch.width, Touch.width); // to change
 		}
-	}
+	}	
 	
 	public void clean(){
 		toTouch = null;
@@ -53,7 +55,8 @@ public class Window extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g){
 		super.paintComponents(g);
-		drawPoint(g,xPop,yPop);
+		this.toTouch.clean(g); // remove old Touch element
+		this.toTouch.draw(g); // draw the new one
 	}
 
 	public void play(int limitX, int limitY, int duration){
@@ -62,9 +65,9 @@ public class Window extends JPanel{
 			if(this.begin >= this.end){
 				xPop = random.nextInt(limitX) + 1;
 				yPop = random.nextInt(limitY) + 1;
+				this.toTouch.set(xPop, yPop);
 				System.out.println("POP = " + "( " + xPop + ", " + yPop + " )");
 				this.end = System.currentTimeMillis() + Game.timeSpawn;
-				clean();
 				repaint();
 			}
 		}	
