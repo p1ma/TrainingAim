@@ -3,7 +3,7 @@ package listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import element.Touch;
+import window.Window;
 
 /**
  * 
@@ -12,9 +12,9 @@ import element.Touch;
  */
 public class MyListener implements MouseListener{
 
-	private Touch object;
+	private Window object;
 	
-	public MyListener(Touch touch){
+	public MyListener(Window touch){
 		this.object = touch;
 	}
 	@Override
@@ -41,9 +41,12 @@ public class MyListener implements MouseListener{
 		//System.out.println("XMouse : " + arg0.getX() + " , " + "YMouse : " + arg0.getY());
 		boolean touched = this.object.overlap(arg0.getX(), arg0.getY());
 		if(touched){
+			//if touched -> new point
 			System.out.println("Point touched !");
+			this.object.isTouched();
 		}
 		else{
+			// try again
 			System.out.println("Point missed !");
 		}
 		//System.out.println("PRESSED");

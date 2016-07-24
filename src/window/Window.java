@@ -25,6 +25,7 @@ public class Window extends JPanel{
 	private long begin,end;
 	private long start;
 	private int xPop, yPop;
+	private boolean touched;
 	
 	public Window(Color background){
 		super();
@@ -37,9 +38,10 @@ public class Window extends JPanel{
 		
 		xPop = 1;
 		yPop = 1;
+		touched = false;
 		
 		this.toTouch = new Point(xPop, yPop);
-		this.listener = new MyListener(this.toTouch);
+		this.listener = new MyListener(this);
 		this.addMouseListener(this.listener); // listener added
 		repaint();
 	}
@@ -66,7 +68,19 @@ public class Window extends JPanel{
 	public void play(int limitX, int limitY, int duration){
 		while(begin <= start + duration){
 			this.begin = System.currentTimeMillis();
-			if(this.begin >= this.end){
+			//if Touch object is not touched no need to re-draw it, wait duration
+			if(!touched){
+				if(this.begin >= this.end){
+					xPop = random.nextInt(limitX) + 1;
+					yPop = random.nextInt(limitY) + 1;
+					this.toTouch.set(xPop, yPop);
+					System.out.println("POP = " + "( " + xPop + ", " + yPop + " )");
+					this.end = System.currentTimeMillis() + Game.timeSpawn;
+					repaint();
+				}
+			}//Touch object touched
+			else{
+				touched = false;
 				xPop = random.nextInt(limitX) + 1;
 				yPop = random.nextInt(limitY) + 1;
 				this.toTouch.set(xPop, yPop);
@@ -76,5 +90,13 @@ public class Window extends JPanel{
 			}
 		}	
 		System.out.println("GAME OVER BRUH");
+	}
+	
+	public boolean overlap(int xMouse, int yMouse){
+		return this.toTouch.overlap(xMouse, yMouse);
+	}
+	
+	public void isTouched(){
+		touched = true;
 	}
 }
