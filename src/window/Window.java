@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
+import listener.MyListener;
 import model.Game;
 
 import element.Point;
@@ -19,6 +20,7 @@ import element.Touch;
 public class Window extends JPanel{
 
 	private Touch toTouch; 
+	private MyListener listener; // mouseListener on Touch object
 	private Random random;
 	private long begin,end;
 	private long start;
@@ -37,6 +39,8 @@ public class Window extends JPanel{
 		yPop = 1;
 		
 		this.toTouch = new Point(xPop, yPop);
+		this.listener = new MyListener(this.toTouch);
+		this.addMouseListener(this.listener); // listener added
 		repaint();
 	}
 	

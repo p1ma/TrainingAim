@@ -45,6 +45,8 @@ public abstract class Touch extends BufferedImage{
 	
 	public abstract void clean(Graphics graphics);
 	
+	public abstract boolean overlap(int xMouse, int yMouse);
+	
 	public void set(int xP, int yP){
 		this.xOld = this.x;
 		this.yOld = this.y;
