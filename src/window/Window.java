@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import listener.MyListener;
 import model.Game;
 
+import element.Circle;
 import element.Point;
 import element.Touch;
 
@@ -98,8 +99,8 @@ public class Window extends JPanel{
 	}
 	
 	public void generate(){
-		xPop = random.nextInt(this.limitX - this.toTouch.width) + 1;
-		yPop = random.nextInt(this.limitY - this.toTouch.width) + 1;
+		xPop = random.nextInt(this.limitX - 2*this.toTouch.width) + 1;
+		yPop = random.nextInt(this.limitY - 2*this.toTouch.width) + 1;
 	}
 	
 	public void respawn(){
@@ -112,12 +113,20 @@ public class Window extends JPanel{
 	
 	public void isPoint(){
 		this.toTouch = new Point(xPop, yPop);
-		this.touched = true;
+		repaint();
+	}
+	
+	public void isCircle(){
+		this.toTouch = new Circle(xPop, yPop);
 		repaint();
 	}
 	
 	public void pop(){
 		generate();
 		respawn();
+	}
+	
+	public void setColor(Color color){
+		this.toTouch.setColor(color);
 	}
 }

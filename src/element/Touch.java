@@ -43,6 +43,10 @@ public abstract class Touch extends BufferedImage{
 		return this.color;
 	}
 	
+	public void setColor(Color color){
+		this.color = color;
+	}
+	
 	public abstract void draw(Graphics graphics);
 	
 	public abstract void clean(Graphics graphics);

@@ -33,7 +33,8 @@ public class Game extends JFrame{
 	}
 	
 	public void play(int duration){
-		this.gameWindow.isPoint(); // to make a Point appeared 
+		this.gameWindow.isCircle(); // to make a Point appeared 
+		this.gameWindow.setColor(Color.BLACK);
 		this.gameWindow.play(length, height, duration);
 	}
 	
