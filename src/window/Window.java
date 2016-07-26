@@ -29,6 +29,7 @@ public class Window extends JPanel{
 	private int limitX, limitY;
 	private boolean touched;
 	private int score;
+	private boolean drawBorder;
 	
 	public Window(Color background){
 		super();
@@ -45,6 +46,7 @@ public class Window extends JPanel{
 		limitY = 1;
 		score = 0;
 		touched = false;
+		drawBorder = true;
 		
 		this.toTouch = null;
 		this.listener = new MyListener(this);
@@ -61,6 +63,9 @@ public class Window extends JPanel{
 		if(!(this.toTouch == null)){
 		this.toTouch.clean(g); // remove old Touch element
 		this.toTouch.draw(g); // draw the new one
+		}
+		if(drawBorder){
+			g.drawRect(0, 0, limitX, limitY);
 		}
 	}
 	

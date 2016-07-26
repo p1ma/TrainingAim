@@ -24,9 +24,9 @@ public class Game extends JFrame{
 		super("Training Aim");
 		this.height = height;
 		this.length = length;
-		this.setPreferredSize(new Dimension(length,height));
 		this.gameWindow = new Window(gameColor);
 		this.add(gameWindow,BorderLayout.CENTER);
+		this.size(length,height);
 		this.pack();
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -37,5 +37,23 @@ public class Game extends JFrame{
 		this.gameWindow.setColor(Color.RED);
 		this.gameWindow.play(length, height, duration);
 	}
+	
+	public void size(int length, int height){
+		//willing
+		Dimension dim = new Dimension((int)(length * 1.01),(int)(height * 1.01)); // +1%
+		this.setPreferredSize(dim);
+		this.gameWindow.setPreferredSize(dim);
+		
+		//min
+		this.setMinimumSize(dim);
+		this.gameWindow.setMinimumSize(dim);
+		
+		//max
+		this.setMaximumSize(dim);
+		this.gameWindow.setMaximumSize(dim);
+	}
+	
+	
+	
 	
 }
