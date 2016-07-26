@@ -18,6 +18,7 @@ public abstract class Touch extends BufferedImage{
 	protected int xOld, yOld;
 	public static int width = 10;
 	protected Graphics graphics;
+	protected int value; // score value, smaller width = greater value
 	
 	public Touch(int x, int y){
 		super(x,y,BufferedImage.TYPE_INT_ARGB);
@@ -27,6 +28,7 @@ public abstract class Touch extends BufferedImage{
 		this.yOld = this.y;
 		this.box = null;
 		this.color = new Color(255,255,255); // default = white 
+		this.value = (10 * (10/width)) ; // considered 10 as default value
 	}
 	
 	public int getX(){
@@ -56,6 +58,10 @@ public abstract class Touch extends BufferedImage{
 	
 	public Graphics getGraphics(){
 		return this.createGraphics();
+	}
+	
+	public int getValue(){
+		return this.value;
 	}
 
 }
