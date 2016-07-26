@@ -40,10 +40,10 @@ public class Window extends JPanel{
 		yPop = 1;
 		touched = false;
 		
-		this.toTouch = new Point(xPop, yPop);
+		this.toTouch = null;
 		this.listener = new MyListener(this);
 		this.addMouseListener(this.listener); // listener added
-		repaint();
+		//repaint();
 	}
 	
 	public void drawPoint(Graphics g, int x, int y){
@@ -61,13 +61,16 @@ public class Window extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g){
 		super.paintComponents(g);
+		if(!(this.toTouch == null)){
 		this.toTouch.clean(g); // remove old Touch element
 		this.toTouch.draw(g); // draw the new one
+		}
 	}
 	
 	
 
 	public void play(int limitX, int limitY, int duration){
+		this.toTouch = new Point(xPop, yPop);
 		while(begin <= start + duration){
 			this.begin = System.currentTimeMillis();
 			//if Touch object is not touched no need to re-draw it, wait duration
@@ -82,6 +85,7 @@ public class Window extends JPanel{
 				}
 			}//Touch object touched
 			else{
+				System.out.println("Goog work, repainting inc...");
 				this.begin = System.currentTimeMillis();
 				touched = false;
 				generate(limitX, limitY);
@@ -95,7 +99,11 @@ public class Window extends JPanel{
 	}
 	
 	public boolean overlap(int xMouse, int yMouse){
+		if(!(this.toTouch == null)){
 		return this.toTouch.overlap(xMouse, yMouse);
+		}else{
+			return false;
+		}
 	}
 	
 	public void isTouched(){

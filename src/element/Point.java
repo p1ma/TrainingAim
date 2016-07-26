@@ -14,7 +14,7 @@ public class Point extends Touch{
 	{
 		super(x,y);
 		box = new Rectangle(x,y,Touch.width,Touch.width);
-		this.graphics = this.createGraphics();
+		this.graphics = this.createGraphics(); // to change
 	}
 
 	@Override
