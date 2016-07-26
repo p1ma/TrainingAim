@@ -38,20 +38,12 @@ public class Window extends JPanel{
 		
 		xPop = 1;
 		yPop = 1;
-		touched = false;
+		touched = true;
 		
 		this.toTouch = null;
 		this.listener = new MyListener(this);
 		this.addMouseListener(this.listener); // listener added
 		//repaint();
-	}
-	
-	public void drawPoint(Graphics g, int x, int y){
-		if(toTouch == null){
-			this.toTouch = new Point(x,y);
-			g.setColor(toTouch.getColor());
-			g.fillRect(x, y, Touch.width, Touch.width); // to change
-		}
 	}	
 	
 	public void clean(){
@@ -70,29 +62,21 @@ public class Window extends JPanel{
 	
 
 	public void play(int limitX, int limitY, int duration){
-		this.toTouch = new Point(xPop, yPop);
+		System.out.println("Playin' ...");
 		while(begin <= start + duration){
 			this.begin = System.currentTimeMillis();
 			//if Touch object is not touched no need to re-draw it, wait duration
 			if(!touched){
 				if(this.begin >= this.end){
-					touched = false;
 					generate(limitX, limitY);
-					this.toTouch.set(xPop, yPop);
-					System.out.println("POP = " + "( " + xPop + ", " + yPop + " )");
-					this.end = System.currentTimeMillis() + Game.timeSpawn;
-					repaint();
+					respawn();
 				}
 			}//Touch object touched
 			else{
 				System.out.println("Goog work, repainting inc...");
 				this.begin = System.currentTimeMillis();
-				touched = false;
 				generate(limitX, limitY);
-				this.toTouch.set(xPop, yPop);
-				System.out.println("POP = " + "( " + xPop + ", " + yPop + " )");
-				this.end = System.currentTimeMillis() + Game.timeSpawn;
-				repaint();
+				respawn();
 			}
 		}	
 		System.out.println("GAME OVER BRUH");
@@ -107,11 +91,25 @@ public class Window extends JPanel{
 	}
 	
 	public void isTouched(){
+		//System.out.println("Confirmation, object touched");
 		touched = true;
 	}
 	
 	public void generate(int limitX, int limitY){
 		xPop = random.nextInt(limitX - this.toTouch.width) + 1;
 		yPop = random.nextInt(limitY - this.toTouch.width) + 1;
+	}
+	
+	public void respawn(){
+		this.touched = false;
+		this.toTouch.set(xPop, yPop);
+		System.out.println("POP = " + "( " + xPop + ", " + yPop + " )");
+		this.end = System.currentTimeMillis() + Game.timeSpawn;
+		repaint();
+	}
+	
+	public void isPoint(){
+		this.toTouch = new Point(xPop, yPop);
+		repaint();
 	}
 }

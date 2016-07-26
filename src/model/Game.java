@@ -33,6 +33,7 @@ public class Game extends JFrame{
 	}
 	
 	public void play(int duration){
+		this.gameWindow.isPoint(); // to make a Point appeared 
 		this.gameWindow.play(length, height, duration);
 	}
 	
