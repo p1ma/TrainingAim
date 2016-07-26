@@ -49,7 +49,6 @@ public class Window extends JPanel{
 		this.toTouch = null;
 		this.listener = new MyListener(this);
 		this.addMouseListener(this.listener); // listener added
-		//repaint();
 	}	
 	
 	public void clean(){
@@ -78,7 +77,8 @@ public class Window extends JPanel{
 					pop();
 				}
 		}	
-		System.out.println("GAME OVER BRUH");
+		this.removeMouseListener(listener);
+		System.out.println("GAME OVER BRUH\nSCORE : " + score);
 	}
 	
 	public boolean overlap(int xMouse, int yMouse){

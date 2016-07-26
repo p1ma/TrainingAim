@@ -28,7 +28,7 @@ public class Circle extends Touch{
 	@Override
 	public void clean(Graphics graphics) {
 		// TODO Auto-generated method stub
-		graphics.clearRect(xOld, yOld, 2*Touch.width, 2*Touch.width); // need to be verified
+		graphics.clearRect(xOld, yOld, Touch.width, Touch.width); // need to be verified
 	}
 
 	@Override
