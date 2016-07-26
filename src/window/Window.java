@@ -65,7 +65,10 @@ public class Window extends JPanel{
 		this.toTouch.draw(g); // draw the new one
 		}
 		if(drawBorder){
+			Color old = g.getColor();
+			g.setColor(new Color(0,0,0)); // black border
 			g.drawRect(0, 0, limitX, limitY);
+			g.setColor(old);
 		}
 	}
 	
